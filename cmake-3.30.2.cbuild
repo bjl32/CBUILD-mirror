@@ -1,0 +1,25 @@
+SRC_URI=[[https://cmake.org/files/v3.30/cmake-3.30.2.tar.gz]]
+DEPEND=[[
+    curl-8.9.1
+    libarchive-3.7.4
+    lib-1.48.0
+    nghttp2-1.62.1
+    ]]
+    
+ 
+
+Commands=[[
+  tar -xf cmake-3.30.2.tar.gz
+  cd cmake-3.30.2
+  sed -i '/"lib64"/s/64//' Modules/GNUInstallDirs.cmake &&
+
+  ./bootstrap --prefix=/usr        \
+              --system-libs        \
+              --mandir=/share/man  \
+              --no-system-jsoncpp  \
+              --no-system-cppdap   \
+              --no-system-librhash \
+              --docdir=/share/doc/cmake-3.30.2 &&
+  make &&
+  sudo make install &&
+  touch /usr/ch/installed/cmake-3.30.2]]
